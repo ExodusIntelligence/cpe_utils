@@ -128,25 +128,6 @@
 <h1>cpe_utils<a class="headerlink" href="#cpe-utils" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>This is a paragraph. Tasdflkjasdlfkjasdf sdlkfjas ldkfj
-asdflkjasd flaskdj flkasdjf laksdj f
-sdaflkjasdflkajsdlfkj</p>
-<p>Here is some code, and this is <code class="docutils literal"><span class="pre">inline</span> <span class="pre">mono-space</span> <span class="pre">text</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
-
-<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something&quot;</span>
-<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Blah blah blah</p>
-<ul class="simple">
-<li>list item</li>
-<li>list item</li>
-<li>list item</li>
-</ul>
-</div>
-<div class="section" id="human-readable-representation">
-<h2>Human Readable Representation<a class="headerlink" href="#human-readable-representation" title="Permalink to this headline">¶</a></h2>
 <p>This is a paragraph.</p>
 <p>Here is some code, and this is <code class="docutils literal"><span class="pre">inline</span> <span class="pre">mono-space</span> <span class="pre">text</span></code></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
@@ -155,15 +136,35 @@ sdaflkjasdflkajsdlfkj</p>
 <span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Blah blah blah</p>
+<p>Self.vendor is parsed from the cpe_str:</p>
 <ul class="simple">
 <li>list item</li>
 <li>list item</li>
 <li>list item</li>
 </ul>
 </div>
-<div class="section" id="cpe-matching">
-<h2>CPE Matching<a class="headerlink" href="#cpe-matching" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="human-readable-representation">
+<h2>Human Readable Representation<a class="headerlink" href="#human-readable-representation" title="Permalink to this headline">¶</a></h2>
+<p>The Human Readable method translates a &#8216;&#8217;Common Platform Enumeration&#8217;&#8217; (CPE) string to readable text.
+One arguement is required as shown in the example below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
+
+<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/o:microsoft:windows_8:::x64&quot;</span>
+<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cpe</span><span class="o">.</span><span class="n">human</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Once a CPE is created the &#8216;&#8217;get_human&#8217;&#8217; method returns a single string containing the readable value.
+The following translation is performed:</p>
+<ul class="simple">
+<li>Underscore character is replaced with a space</li>
+<li>The first letter of each section is capitalized</li>
+</ul>
+<p>Returns</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Microsoft</span> <span class="n">Windows</span> <span class="mi">8</span> <span class="n">x64</span>
+</pre></div>
+</div>
+<hr class="docutils" />
 <p>This is a paragraph.</p>
 <p>Here is some code, and this is <code class="docutils literal"><span class="pre">inline</span> <span class="pre">mono-space</span> <span class="pre">text</span></code></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
@@ -181,20 +182,36 @@ sdaflkjasdflkajsdlfkj</p>
 </div>
 <div class="section" id="to-json-and-to-dict">
 <h2>to_json() and to_dict()<a class="headerlink" href="#to-json-and-to-dict" title="Permalink to this headline">¶</a></h2>
-<p>This is a paragraph.</p>
-<p>Here is some code, and this is <code class="docutils literal"><span class="pre">inline</span> <span class="pre">mono-space</span> <span class="pre">text</span></code></p>
+<p><code class="docutils literal"><span class="pre">JavaScript</span> <span class="pre">Object</span> <span class="pre">Notation</span></code> (JSON), is a lightweight data interchange format inspired by JavaScript object literal syntax.
+The <code class="docutils literal"><span class="pre">to_json()</span></code> method takes a cpe string which is then translated into json syntax by using the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Data is represented in name/value pairs</li>
+<li>Curly braces hold objects and each name is followed by &#8216;:&#8217;(colon), the name/value paris are sperated by , (commma)</li>
+<li>Square brackets hold arrays and values are separted by , (comma)</li>
+</ul>
+</div></blockquote>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
 
-<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something&quot;</span>
+<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something:something:&quot;</span>
 <span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
+<span class="n">cpe</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Blah blah blah</p>
-<ul class="simple">
-<li>list item</li>
-<li>list item</li>
-<li>list item</li>
-</ul>
+<p>Returns</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="s2">&quot;something&quot;</span><span class="p">,</span> <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;something&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;edition&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;part&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">to_dict()</span></code> method creates a dictionary from a cpe string.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something:something&quot;</span>
+<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
+<span class="n">cpe</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s1">&#39;product&#39;</span><span class="p">:</span> <span class="s1">&#39;something&#39;</span><span class="p">,</span> <span class="s1">&#39;vendor&#39;</span><span class="p">:</span> <span class="s1">&#39;something&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;edition&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;part&#39;</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
 <div class="section" id="contents">
 <h3>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
