@@ -9,20 +9,20 @@ cpe_utils
 Getting Started
 ^^^^^^^^^^^^^^^
 
-This is a paragraph. Tasdflkjasdlfkjasdf sdlkfjas ldkfj
-asdflkjasd flaskdj flkasdjf laksdj f
-sdaflkjasdflkajsdlfkj
+This is a paragraph.
 
 Here is some code, and this is ``inline mono-space text``
 
 .. code-block:: python
 
-    import cpe_utils
 
+    import cpe_utils
+   
     cpe_str = "cpe:/a:something"
     cpe = cpe_utils.CPE(cpe_str)
+    
 
-Blah blah blah
+Self.vendor is parsed from the cpe_str:
 
 * list item
 * list item
@@ -31,24 +31,31 @@ Blah blah blah
 Human Readable Representation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is a paragraph.
-
-Here is some code, and this is ``inline mono-space text``
+The Human Readable method translates a ''Common Platform Enumeration'' (CPE) string to readable text.
+One arguement is required as shown in the example below:
 
 .. code-block:: python
 
     import cpe_utils
 
-    cpe_str = "cpe:/a:something"
-    cpe = cpe_utils.CPE(cpe_str)
+    cpe_str = "cpe:/o:microsoft:windows_8:::x64"
+    cpe = cpe_utils.CPE(cpe_str)   
+    >>> cpe.human()
 
-Blah blah blah
+Once a CPE is created the ''get_human'' method returns a single string containing the readable value.
+The following translation is performed:
 
-* list item
-* list item
-* list item
+* Underscore character is replaced with a space
+* The first letter of each section is capitalized
 
-CPE Matching
+Returns
+
+.. code-block:: python 
+    
+    >>> Microsoft Windows 8 x64
+
+
+
 ^^^^^^^^^^^^
 
 This is a paragraph.
@@ -71,22 +78,45 @@ Blah blah blah
 to_json() and to_dict()
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-This is a paragraph.
+``JavaScript Object Notation`` (JSON), is a lightweight data interchange format inspired by JavaScript object literal syntax.
+The ``to_json()`` method takes a cpe string which is then translated into json syntax by using the following:
 
-Here is some code, and this is ``inline mono-space text``
+ * Data is represented in name/value pairs
+ * Curly braces hold objects and each name is followed by ':'(colon), the name/value paris are sperated by , (commma)
+ * Square brackets hold arrays and values are separted by , (comma)
 
 .. code-block:: python
 
     import cpe_utils
 
-    cpe_str = "cpe:/a:something"
+    cpe_str = "cpe:/a:something:something:"
     cpe = cpe_utils.CPE(cpe_str)
+    cpe.json()
 
-Blah blah blah
+Returns
 
-* list item
-* list item
-* list item
+.. code-block:: python
+
+    {"product": "something", "vendor": "something", "version": " ", "update": "", "edition": "", "part": "a"}
+
+
+The ``to_dict()`` method creates a dictionary from a cpe string.
+
+.. code-block:: python
+    
+    cpe_str = "cpe:/a:something:something"
+    cpe = cpe_utils.CPE(cpe_str)
+    cpe.to_dict()
+
+Returns
+
+.. code-block:: python
+
+    {'product': 'something', 'vendor': 'something', 'version': '', 'update': '', 'edition': '', 'part': 'a'}
+
+
+
+
 
 Contents
 #########
