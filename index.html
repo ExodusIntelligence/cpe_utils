@@ -30,6 +30,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="cpe_utils 1.0.0 documentation" href="#"/> 
 
   
@@ -79,9 +82,20 @@
           
             
             
-                <ul class="simple">
+                <!-- Local TOC -->
+                <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">cpe_utils</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#human-readable-representation">Human Readable Representation</a></li>
+<li><a class="reference internal" href="#to-json-and-to-dict">to_json() and to_dict()</a><ul>
+<li><a class="reference internal" href="#contents">Contents</a></li>
 </ul>
-
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
             
           
         </div>
@@ -102,7 +116,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -114,7 +128,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -128,14 +142,15 @@
 <h1>cpe_utils<a class="headerlink" href="#cpe-utils" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>This is a paragraph.</p>
-<p>Here is some code, and this is <code class="docutils literal"><span class="pre">inline</span> <span class="pre">mono-space</span> <span class="pre">text</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
-
-<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something&quot;</span>
-<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
-</pre></div>
-</div>
+<p><code class="docutils literal"><span class="pre">Common</span> <span class="pre">Platform</span> <span class="pre">Enumeration</span></code> (CPE) is considered to be an industry standard that is used to provide a uniform way to show information on operating systems, hardward and software.</p>
+<p>This tool is a collection of CPE-related utilities.</p>
+<p>Cpe_utils handles both CPE 1.0 and CPE 2.3 formats, provides functions for comparing cpes, determining if they match, and expanding a CPE that contains wildcards.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<blockquote>
+<div><p>import cpe_utils</p>
+<p>cpe_str = &#8220;cpe:/a:something&#8221;
+cpe = cpe_utils.CPE(cpe_str)</p>
+</div></blockquote>
 <p>Self.vendor is parsed from the cpe_str:</p>
 <ul class="simple">
 <li>list item</li>
@@ -147,7 +162,22 @@
 <h2>Human Readable Representation<a class="headerlink" href="#human-readable-representation" title="Permalink to this headline">¶</a></h2>
 <p>The Human Readable method translates a &#8216;&#8217;Common Platform Enumeration&#8217;&#8217; (CPE) string to readable text.
 One arguement is required as shown in the example below:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cpe_utils</span>
+
+<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/o:microsoft:windows_8:::x64&quot;</span>
+<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cpe</span><span class="o">.</span><span class="n">human</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Once a CPE is created the &#8216;&#8217;get_human&#8217;&#8217; method returns a single string containing the readable value.
+The following translation is performed:</p>
+<ul class="simple">
+<li>Underscore character is replaced with a space</li>
+<li>The first letter of each section is capitalized</li>
+</ul>
+<p>The Human Readable method translates a &#8216;&#8217;Common Platform Enumeration&#8217;&#8217; (CPE) string to readable text.
+One arguement is required as shown in the example below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cpe_utils</span>
 
 <span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/o:microsoft:windows_8:::x64&quot;</span>
 <span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
@@ -161,24 +191,41 @@ The following translation is performed:</p>
 <li>The first letter of each section is capitalized</li>
 </ul>
 <p>Returns</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Microsoft</span> <span class="n">Windows</span> <span class="mi">8</span> <span class="n">x64</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Microsoft</span> <span class="n">Windows</span> <span class="mi">8</span> <span class="n">x64</span>
 </pre></div>
 </div>
-<hr class="docutils" />
-<p>This is a paragraph.</p>
-<p>Here is some code, and this is <code class="docutils literal"><span class="pre">inline</span> <span class="pre">mono-space</span> <span class="pre">text</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
-
-<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something&quot;</span>
-<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Blah blah blah</p>
+<p>CPE matching can be used as follows:</p>
 <ul class="simple">
-<li>list item</li>
-<li>list item</li>
-<li>list item</li>
+<li>matches(self, cpe) - Compare if a CPE object exactly matches the provided cpe_obj</li>
+<li>has_wildcards(self) - Compare if a CPE with wildcards matches another cpe(using a provided list of reference CPEs)</li>
+<li>expand_cpe(cpe_str, cpe_list) - Test a cpe against a list of CPEs</li>
 </ul>
+<p><code class="docutils literal"><span class="pre">matches()</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cpe_utils</span>
+
+<span class="n">cpe_str1</span> <span class="o">=</span> <span class="s2">&quot;cpe:/windows:microsoft:version:edition&quot;</span>
+<span class="n">cpe1</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str1</span><span class="p">)</span>
+<span class="n">cpe_str2</span> <span class="o">=</span> <span class="s2">&quot;cpe:/linux:ubuntu:version:edition&quot;</span>
+<span class="n">cpe2</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str2</span><span class="p">)</span>
+<span class="n">cpe1</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">cpe2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">False</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">has_wildcards()</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cpe_utils</span>
+
+<span class="n">cpe_str1</span> <span class="o">=</span> <span class="s2">&quot;cpe:/*:vendor:product:version:update:edition&quot;</span>
+<span class="n">cpe1</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str1</span><span class="p">)</span>
+<span class="n">cpe1</span><span class="o">.</span><span class="n">has_wildcards</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Results</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">True</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="to-json-and-to-dict">
 <h2>to_json() and to_dict()<a class="headerlink" href="#to-json-and-to-dict" title="Permalink to this headline">¶</a></h2>
@@ -191,7 +238,7 @@ The <code class="docutils literal"><span class="pre">to_json()</span></code> met
 <li>Square brackets hold arrays and values are separted by , (comma)</li>
 </ul>
 </div></blockquote>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cpe_utils</span>
 
 <span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something:something:&quot;</span>
 <span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
@@ -199,24 +246,22 @@ The <code class="docutils literal"><span class="pre">to_json()</span></code> met
 </pre></div>
 </div>
 <p>Returns</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="s2">&quot;something&quot;</span><span class="p">,</span> <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;something&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;edition&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;part&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="s2">&quot;something&quot;</span><span class="p">,</span> <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;something&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;edition&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;part&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">to_dict()</span></code> method creates a dictionary from a cpe string.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something:something&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something:something&quot;</span>
 <span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
 <span class="n">cpe</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Returns</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s1">&#39;product&#39;</span><span class="p">:</span> <span class="s1">&#39;something&#39;</span><span class="p">,</span> <span class="s1">&#39;vendor&#39;</span><span class="p">:</span> <span class="s1">&#39;something&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;edition&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;part&#39;</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;product&#39;</span><span class="p">:</span> <span class="s1">&#39;something&#39;</span><span class="p">,</span> <span class="s1">&#39;vendor&#39;</span><span class="p">:</span> <span class="s1">&#39;something&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;edition&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;part&#39;</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
 <div class="section" id="contents">
 <h3>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
 </div>
 <span class="target" id="module-cpe_utils"></span><p>CPE UTILS</p>
 <p>TODO: Add a good description of this module</p>
@@ -245,9 +290,9 @@ in the provided cpe list</p>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 
