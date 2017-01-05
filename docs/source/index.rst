@@ -13,41 +13,21 @@ Getting Started
 
 This tool is a collection of CPE-related utilities.
 
-Cpe_utils handles both CPE 1.0 and CPE 2.3 formats, provides functions for comparing cpes, determining if they match, and expanding a CPE that contains wildcards.
+cpe_utils handles both CPE 1.0 and CPE 2.3 formats, provides functions for comparing cpes, determining if they match, and expanding a CPE that contains wildcards.
 
-<<<<<<< HEAD
+Installation
+^^^^^^^^^^^^
 
-    import cpe_utils
-   
-    cpe_str = "cpe:/a:something"
-    cpe = cpe_utils.CPE(cpe_str)
-    
-
-Self.vendor is parsed from the cpe_str:
-
-* list item
-* list item
-* list item
-
-Human Readable Representation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The Human Readable method translates a ''Common Platform Enumeration'' (CPE) string to readable text.
-One arguement is required as shown in the example below:
+cpe_utils can be installed from the command line as follows:
 
 .. code-block:: python
 
-    import cpe_utils
+    pip install cpe_utils
 
-    cpe_str = "cpe:/o:microsoft:windows_8:::x64"
-    cpe = cpe_utils.CPE(cpe_str)   
-    >>> cpe.human()
+Once installed users can use the tool using the following methods.
 
-Once a CPE is created the ''get_human'' method returns a single string containing the readable value.
-The following translation is performed:
-
-* Underscore character is replaced with a space
-* The first letter of each section is capitalized
+Human Readable Representation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Human Readable method translates a ''Common Platform Enumeration'' (CPE) string to readable text.
 One arguement is required as shown in the example below:
@@ -72,6 +52,9 @@ Returns
     
     >>> Microsoft Windows 8 x64
 
+
+CPE Matching
+^^^^^^^^^^^^
 
 CPE matching can be used as follows:
 
@@ -114,7 +97,6 @@ Results
 .. code-block:: python
     
     True
-
 
 to_json() and to_dict()
 ^^^^^^^^^^^^^^^^^^^^^^^
