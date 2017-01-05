@@ -19,6 +19,9 @@ class CPEException(Exception): pass
 
 
 class CPE(object):
+    """A container class for parsed cpe strings.
+    """
+
     attrs = ["part", "vendor", "product", "version", "update", "edition"]
 
     def __init__(self, cpe_str):
