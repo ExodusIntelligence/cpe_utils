@@ -251,6 +251,54 @@ The <code class="docutils literal"><span class="pre">to_json()</span></code> met
 </div>
 <span class="target" id="module-cpe_utils"></span><p>CPE UTILS</p>
 <p>TODO: Add a good description of this module</p>
+<dl class="class">
+<dt id="cpe_utils.CPE">
+<em class="property">class </em><code class="descclassname">cpe_utils.</code><code class="descname">CPE</code><span class="sig-paren">(</span><em>cpe_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for parsed cpe strings.</p>
+<dl class="method">
+<dt id="cpe_utils.CPE.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cpe_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new CPE object that represents the cpe_str</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cpe_str</strong> (<em>str</em>) &#8211; The cpe string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cpe_utils.CPE.has_wildcards">
+<code class="descname">has_wildcards</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE.has_wildcards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE.has_wildcards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true or false if any of this cpe&#8217;s fields contain
+wildcards</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cpe_utils.CPE.human">
+<code class="descname">human</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE.human"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE.human" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes cpe version of it user friendly</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cpe_utils.CPE.matches">
+<code class="descname">matches</code><span class="sig-paren">(</span><em>cpe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE.matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true or false if this CPE object matches
+the provided cpe_str, using wildcards.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cpe</strong> &#8211; The cpe to compare against</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="function">
 <dt id="cpe_utils.expand_cpe">
 <code class="descclassname">cpe_utils.</code><code class="descname">expand_cpe</code><span class="sig-paren">(</span><em>cpe_str</em>, <em>cpe_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#expand_cpe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.expand_cpe" title="Permalink to this definition">¶</a></dt>
