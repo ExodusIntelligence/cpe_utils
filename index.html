@@ -86,7 +86,9 @@
                 <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">cpe_utils</a><ul>
 <li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#human-readable-representation">Human Readable Representation</a></li>
+<li><a class="reference internal" href="#cpe-matching">CPE Matching</a></li>
 <li><a class="reference internal" href="#to-json-and-to-dict">to_json() and to_dict()</a><ul>
 <li><a class="reference internal" href="#contents">Contents</a></li>
 </ul>
@@ -144,37 +146,18 @@
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">Common</span> <span class="pre">Platform</span> <span class="pre">Enumeration</span></code> (CPE) is considered to be an industry standard that is used to provide a uniform way to show information on operating systems, hardward and software.</p>
 <p>This tool is a collection of CPE-related utilities.</p>
-<p>Cpe_utils handles both CPE 1.0 and CPE 2.3 formats, provides functions for comparing cpes, determining if they match, and expanding a CPE that contains wildcards.</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
-<blockquote>
-<div><p>import cpe_utils</p>
-<p>cpe_str = &#8220;cpe:/a:something&#8221;
-cpe = cpe_utils.CPE(cpe_str)</p>
-</div></blockquote>
-<p>Self.vendor is parsed from the cpe_str:</p>
-<ul class="simple">
-<li>list item</li>
-<li>list item</li>
-<li>list item</li>
-</ul>
+<p>cpe_utils handles both CPE 1.0 and CPE 2.3 formats, provides functions for comparing cpes, determining if they match, and expanding a CPE that contains wildcards.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>cpe_utils can be installed from the command line as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">cpe_utils</span>
+</pre></div>
+</div>
+<p>Once installed users can use the tool using the following methods.</p>
 </div>
 <div class="section" id="human-readable-representation">
 <h2>Human Readable Representation<a class="headerlink" href="#human-readable-representation" title="Permalink to this headline">¶</a></h2>
-<p>The Human Readable method translates a &#8216;&#8217;Common Platform Enumeration&#8217;&#8217; (CPE) string to readable text.
-One arguement is required as shown in the example below:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cpe_utils</span>
-
-<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/o:microsoft:windows_8:::x64&quot;</span>
-<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">cpe</span><span class="o">.</span><span class="n">human</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Once a CPE is created the &#8216;&#8217;get_human&#8217;&#8217; method returns a single string containing the readable value.
-The following translation is performed:</p>
-<ul class="simple">
-<li>Underscore character is replaced with a space</li>
-<li>The first letter of each section is capitalized</li>
-</ul>
 <p>The Human Readable method translates a &#8216;&#8217;Common Platform Enumeration&#8217;&#8217; (CPE) string to readable text.
 One arguement is required as shown in the example below:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cpe_utils</span>
@@ -194,6 +177,9 @@ The following translation is performed:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Microsoft</span> <span class="n">Windows</span> <span class="mi">8</span> <span class="n">x64</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="cpe-matching">
+<h2>CPE Matching<a class="headerlink" href="#cpe-matching" title="Permalink to this headline">¶</a></h2>
 <p>CPE matching can be used as follows:</p>
 <ul class="simple">
 <li>matches(self, cpe) - Compare if a CPE object exactly matches the provided cpe_obj</li>
