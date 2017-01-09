@@ -30,6 +30,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="cpe_utils 1.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
@@ -80,9 +83,8 @@
           
             
             
-                <ul class="simple">
-</ul>
-
+                <!-- Local TOC -->
+                <div class="local-toc"></div>
             
           
         </div>
@@ -126,7 +128,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for cpe_utils</h1><div class="highlight"><pre>
-<span class="ch">#!/usr/bin/env python</span>
+<span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -135,7 +137,7 @@
 <span class="sd">TODO: Add a good description of this module</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">fnmatch</span>
@@ -169,7 +171,7 @@
         <span class="k">elif</span> <span class="n">cpe_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;cpe:2.3:&quot;</span><span class="p">):</span>
             <span class="n">cpe_str</span> <span class="o">=</span> <span class="n">cpe_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;cpe:2.3:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">CPEException</span><span class="p">(</span><span class="s2">&quot;Invalid cpe string {!r}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">CPEException</span><span class="p">(</span><span class="s2">&quot;Invalid cpe string </span><span class="si">{!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">))</span>
 
         <span class="n">parts</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">cpe_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">))</span>
         <span class="n">to_set</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
@@ -182,29 +184,29 @@
 <span class="sd">        wildcards</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">part</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">part</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span> 
+            <span class="k">return</span> <span class="kc">True</span> 
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span> <span class="ow">in</span>  <span class="bp">self</span><span class="o">.</span><span class="n">vendor</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vendor</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">product</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">product</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edition</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edition</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span></div>
 
@@ -220,7 +222,7 @@
 
         <span class="c1"># if there&#39;s lowercase letters in the value, make it a title</span>
         <span class="c1"># (if there&#39;FAILEDs not, leave it alone - e.g. SP3)</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;[a-z]&#39;</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;[a-z]&#39;</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;SP0&quot;</span><span class="p">,</span> <span class="s2">&quot;SP1&quot;</span><span class="p">,</span> <span class="s2">&quot;SP2&quot;</span><span class="p">,</span> <span class="s2">&quot;SP3&quot;</span><span class="p">,</span> <span class="s2">&quot;SP4&quot;</span><span class="p">,</span> <span class="s2">&quot;SP5&quot;</span><span class="p">,</span> <span class="s2">&quot;SP6&quot;</span><span class="p">]:</span>
@@ -242,19 +244,19 @@
         <span class="c1">#     part, vendor, product, version, update, edition</span>
         
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">part</span> <span class="o">!=</span> <span class="n">cpe_obj</span><span class="o">.</span><span class="n">part</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vendor</span> <span class="o">!=</span> <span class="n">cpe_obj</span><span class="o">.</span><span class="n">vendor</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">product</span> <span class="o">!=</span> <span class="n">cpe_obj</span><span class="o">.</span><span class="n">product</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">!=</span> <span class="n">cpe_obj</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">!=</span> <span class="n">cpe_obj</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edition</span> <span class="o">!=</span> <span class="n">cpe_obj</span><span class="o">.</span><span class="n">edition</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
     
-        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="CPE.matches"><a class="viewcode-back" href="../index.html#cpe_utils.CPE.matches">[docs]</a>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpe</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return true or false if this CPE object matches</span>
@@ -265,23 +267,23 @@
         <span class="c1"># TODO see issue #3</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vendor</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">cpe</span><span class="o">.</span><span class="n">vendor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vendor</span><span class="p">):</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;vendor was false&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;vendor was false&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">product</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">cpe</span><span class="o">.</span><span class="n">product</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">product</span><span class="p">):</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;product was false&quot;</span><span class="p">)</span>      
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;product was false&quot;</span><span class="p">)</span>      
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">cpe</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">):</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;version was false&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;version was false&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">cpe</span><span class="o">.</span><span class="n">update</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">):</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;update was false&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;update was false&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">edition</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">cpe</span><span class="o">.</span><span class="n">edition</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">edition</span><span class="p">):</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;edition was false&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;edition was false&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">part</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">cpe</span><span class="o">.</span><span class="n">part</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part</span><span class="p">):</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;part was false&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;part was false&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span></div>
         
