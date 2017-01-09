@@ -128,20 +128,17 @@
 <h1>cpe_utils<a class="headerlink" href="#cpe-utils" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>This is a paragraph.</p>
-<p>Here is some code, and this is <code class="docutils literal"><span class="pre">inline</span> <span class="pre">mono-space</span> <span class="pre">text</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
-
-<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something&quot;</span>
-<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
+<p><code class="docutils literal"><span class="pre">Common</span> <span class="pre">Platform</span> <span class="pre">Enumeration</span></code> (CPE) is considered to be an industry standard that is used to provide a uniform way to show information on operating systems, hardward and software.</p>
+<p>This tool is a collection of CPE-related utilities.</p>
+<p>cpe_utils handles both CPE 1.0 and CPE 2.3 formats, provides functions for comparing cpes, determining if they match, and expanding a CPE that contains wildcards.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>cpe_utils can be installed from the command line as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">cpe_utils</span>
 </pre></div>
 </div>
-<p>Self.vendor is parsed from the cpe_str:</p>
-<ul class="simple">
-<li>list item</li>
-<li>list item</li>
-<li>list item</li>
-</ul>
+<p>Once installed users can use the tool using the following methods.</p>
 </div>
 <div class="section" id="human-readable-representation">
 <h2>Human Readable Representation<a class="headerlink" href="#human-readable-representation" title="Permalink to this headline">¶</a></h2>
@@ -164,21 +161,52 @@ The following translation is performed:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Microsoft</span> <span class="n">Windows</span> <span class="mi">8</span> <span class="n">x64</span>
 </pre></div>
 </div>
-<hr class="docutils" />
-<p>This is a paragraph.</p>
-<p>Here is some code, and this is <code class="docutils literal"><span class="pre">inline</span> <span class="pre">mono-space</span> <span class="pre">text</span></code></p>
+</div>
+<div class="section" id="cpe-matching">
+<h2>CPE Matching<a class="headerlink" href="#cpe-matching" title="Permalink to this headline">¶</a></h2>
+<p>CPE matching can be used as follows:</p>
+<ul class="simple">
+<li>matches(self, cpe) - Compare if a CPE object exactly matches the provided cpe_obj</li>
+<li>has_wildcards(self) - Compare if a CPE with wildcards matches another cpe(using a provided list of reference CPEs)</li>
+<li>expand_cpe(cpe_str, cpe_list) - Test a cpe against a list of CPEs</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">matches()</span></code></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
 
-<span class="n">cpe_str</span> <span class="o">=</span> <span class="s2">&quot;cpe:/a:something&quot;</span>
-<span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str</span><span class="p">)</span>
+<span class="n">cpe_str1</span> <span class="o">=</span> <span class="s2">&quot;cpe:/windows:microsoft:version:edition&quot;</span>
+<span class="n">cpe1</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str1</span><span class="p">)</span>
+<span class="n">cpe_str2</span> <span class="o">=</span> <span class="s2">&quot;cpe:/linux:ubuntu:version:edition&quot;</span>
+<span class="n">cpe2</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str2</span><span class="p">)</span>
+<span class="n">cpe1</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">cpe2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Blah blah blah</p>
-<ul class="simple">
-<li>list item</li>
-<li>list item</li>
-<li>list item</li>
-</ul>
+<p>Returns</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">False</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">has_wildcards()</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
+
+<span class="n">cpe_str1</span> <span class="o">=</span> <span class="s2">&quot;cpe:/*:vendor:product:version:update:edition&quot;</span>
+<span class="n">cpe1</span> <span class="o">=</span> <span class="n">cpe_utils</span><span class="o">.</span><span class="n">CPE</span><span class="p">(</span><span class="n">cpe_str1</span><span class="p">)</span>
+<span class="n">cpe1</span><span class="o">.</span><span class="n">has_wildcards</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Results</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">True</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">expand_cpe(cpe_str,</span> <span class="pre">cpe_list)</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cpe_utils</span>
+
+<span class="n">cpe_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cpe:/o:microsoft:windows_7:::x64&quot;</span><span class="p">,</span> <span class="s2">&quot;cpe:/a:mozilla:firefox:38.1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;cpe:/a:mozilla:firefox:38.3.0&quot;</span><span class="p">,</span> <span class="s2">&quot;cpe:/a:adobe:shockwave_player:11.6.5.635&quot;</span><span class="p">,</span> <span class="s2">&quot;cpe:/a:adobe:reader:11.0.10&quot;</span><span class="p">]</span>
+<span class="n">cpe_utils</span><span class="o">.</span><span class="n">expand_cpe</span><span class="p">(</span><span class="s2">&quot;cpe:/a:adobe&quot;</span><span class="p">,</span> <span class="n">cpe_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Results</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s1">&#39;cpe:/a:adobe:shockwave_player:11.6.5.635&#39;</span><span class="p">,</span> <span class="s1">&#39;cpe:/a:adobe:reader:11.0.10&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="to-json-and-to-dict">
 <h2>to_json() and to_dict()<a class="headerlink" href="#to-json-and-to-dict" title="Permalink to this headline">¶</a></h2>
@@ -220,6 +248,54 @@ The <code class="docutils literal"><span class="pre">to_json()</span></code> met
 </div>
 <span class="target" id="module-cpe_utils"></span><p>CPE UTILS</p>
 <p>TODO: Add a good description of this module</p>
+<dl class="class">
+<dt id="cpe_utils.CPE">
+<em class="property">class </em><code class="descclassname">cpe_utils.</code><code class="descname">CPE</code><span class="sig-paren">(</span><em>cpe_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container class for parsed cpe strings.</p>
+<dl class="method">
+<dt id="cpe_utils.CPE.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>cpe_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new CPE object that represents the cpe_str</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cpe_str</strong> (<em>str</em>) &#8211; The cpe string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cpe_utils.CPE.has_wildcards">
+<code class="descname">has_wildcards</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE.has_wildcards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE.has_wildcards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true or false if any of this cpe&#8217;s fields contain
+wildcards</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cpe_utils.CPE.human">
+<code class="descname">human</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE.human"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE.human" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes cpe version of it user friendly</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cpe_utils.CPE.matches">
+<code class="descname">matches</code><span class="sig-paren">(</span><em>cpe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#CPE.matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.CPE.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true or false if this CPE object matches
+the provided cpe_str, using wildcards.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cpe</strong> &#8211; The cpe to compare against</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="function">
 <dt id="cpe_utils.expand_cpe">
 <code class="descclassname">cpe_utils.</code><code class="descname">expand_cpe</code><span class="sig-paren">(</span><em>cpe_str</em>, <em>cpe_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cpe_utils.html#expand_cpe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cpe_utils.expand_cpe" title="Permalink to this definition">¶</a></dt>
