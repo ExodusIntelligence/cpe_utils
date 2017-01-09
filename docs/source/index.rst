@@ -98,6 +98,23 @@ Results
     
     True
 
+``expand_cpe(cpe_str, cpe_list)``
+
+    
+.. code-block:: python
+
+    import cpe_utils
+
+    cpe_list = ["cpe:/o:microsoft:windows_7:::x64", "cpe:/a:mozilla:firefox:38.1.0", "cpe:/a:mozilla:firefox:38.3.0", "cpe:/a:adobe:shockwave_player:11.6.5.635", "cpe:/a:adobe:reader:11.0.10"]
+    cpe_utils.expand_cpe("cpe:/a:adobe", cpe_list)
+
+Results
+
+.. code-block:: python
+
+    ['cpe:/a:adobe:shockwave_player:11.6.5.635', 'cpe:/a:adobe:reader:11.0.10']
+
+
 to_json() and to_dict()
 ^^^^^^^^^^^^^^^^^^^^^^^
 
