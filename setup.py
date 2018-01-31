@@ -23,7 +23,7 @@ setup(
     install_requires = open(os.path.join(os.path.dirname(__file__), "requirements.txt")).read().split("\n"),
     classifiers = [
         'Programming Language :: Python :: 2',
-    #    'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3',
     ],
     packages=['cpe_utils'],
 )
