@@ -11,6 +11,7 @@ from collections import deque
 import json
 import re
 import fnmatch
+import logging
 
 
 
@@ -137,22 +138,22 @@ class CPE(object):
         # TODO see issue #3
 
         if self.vendor and not fnmatch.fnmatch(cpe.vendor, self.vendor):
-            print ("vendor was false")
+            logging.debug ("vendor was false")
             return False
         elif self.product and not fnmatch.fnmatch(cpe.product, self.product):
-            print ("product was false")      
+            logging.debug ("product was false")      
             return False
         elif self.version and not fnmatch.fnmatch(cpe.version, self.version):
-            print ("version was false")
+            logging.debug ("version was false")
             return False
         elif self.update and not fnmatch.fnmatch(cpe.update, self.update):
-            print ("update was false")
+            logging.debug ("update was false")
             return False
         elif self.edition and not fnmatch.fnmatch(cpe.edition, self.edition):
-            print ("edition was false")
+            logging.debug ("edition was false")
             return False
         elif self.part and not fnmatch.fnmatch(cpe.part, self.part):
-            print ("part was false")
+            logging.debug ("part was false")
             return False
         else:
             return True
