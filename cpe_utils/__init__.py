@@ -137,22 +137,16 @@ class CPE(object):
         # TODO see issue #3
 
         if self.vendor and not fnmatch.fnmatch(cpe.vendor, self.vendor):
-            print ("vendor was false")
             return False
         elif self.product and not fnmatch.fnmatch(cpe.product, self.product):
-            print ("product was false")      
             return False
         elif self.version and not fnmatch.fnmatch(cpe.version, self.version):
-            print ("version was false")
             return False
         elif self.update and not fnmatch.fnmatch(cpe.update, self.update):
-            print ("update was false")
             return False
         elif self.edition and not fnmatch.fnmatch(cpe.edition, self.edition):
-            print ("edition was false")
             return False
         elif self.part and not fnmatch.fnmatch(cpe.part, self.part):
-            print ("part was false")
             return False
         else:
             return True
